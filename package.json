@@ -1,0 +1,24 @@
+{
+  "name": "@lai9fox/vue-bem",
+  "version": "0.0.0",
+  "description": "vue bem class",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lai9fox/vue-bem.git"
+  },
+  "keywords": [
+    "vue",
+    "bem",
+    "class"
+  ],
+  "author": "lai9fox",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lai9fox/vue-bem/issues"
+  },
+  "homepage": "https://github.com/lai9fox/vue-bem#readme"
+}
