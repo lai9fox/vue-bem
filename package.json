@@ -3,8 +3,12 @@
   "version": "0.0.0",
   "description": "vue bem class",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
+  },
+  "jest": {
+    "collectCoverage": true
   },
   "repository": {
     "type": "git",
@@ -20,5 +24,9 @@
   "bugs": {
     "url": "https://github.com/lai9fox/vue-bem/issues"
   },
-  "homepage": "https://github.com/lai9fox/vue-bem#readme"
+  "homepage": "https://github.com/lai9fox/vue-bem#readme",
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.20.11",
+    "jest": "^29.3.1"
+  }
 }
