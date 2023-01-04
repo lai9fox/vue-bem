@@ -1,4 +1,4 @@
-import { typeOF } from "./utils/index.js";
+import { typeOF } from './utils/index.js';
 
 class vueBem {
   constructor() {
@@ -26,27 +26,27 @@ class vueBem {
    * @returns {Function}
    */
   createBem(blockName) {
-    
+
     if (!blockName || typeOF(blockName) !== typeOF.STRING) {
       throw new Error("A 'blockname' of type string is required");
     }
 
-    const prefix = this._gPrefix ? `${this._gPrefix}-${blockName}` : blockName;
+    const prefix = this._gPrefix ? `${ this._gPrefix }-${ blockName }` : blockName;
     /**
-     * 
-     * @param {*} obj 
+     *
+     * @param {*} obj
      * @returns {object}
      */
     const resolveObject = (obj) => {
       const ret = {};
       for (const [key, value] of Object.entries(obj)) {
         if (key.startsWith(':')) {
-          ret[`${prefix}${this._mConnector}${key.substring(1)}`] = value;
+          ret[`${ prefix }${ this._mConnector }${ key.substring(1) }`] = value;
         } else if (key.indexOf(':') !== -1) {
           const [ ele, modi ] = key.split(':');
-          ret[`${prefix}${this._eConnector}${ele}${this._mConnector}${modi}`] = value; 
+          ret[`${ prefix }${ this._eConnector }${ ele }${ this._mConnector }${ modi }`] = value;
         } else {
-          ret[`${prefix}${this._eConnector}${key}`] = value;
+          ret[`${ prefix }${ this._eConnector }${ key }`] = value;
         }
       }
       return ret;
@@ -57,6 +57,7 @@ class vueBem {
      * @param {string} modifier 修饰符，以 ":" 开始
      * @returns {string|string[]|object}
      */
+    // eslint-disable-next-line no-unused-vars
     const em = (description, modifier) => {
 
       if (!description) {
@@ -66,35 +67,35 @@ class vueBem {
       if (typeOF(description) === typeOF.STRING) {
         if (!description.startsWith(':')) {
           if (description.indexOf(':') === -1) {
-            return `${prefix}${this._eConnector}${description}`;
+            return `${ prefix }${ this._eConnector }${ description }`;
           } else {
             const [ ele, modi ] = description.split(':');
-            return `${prefix}${this._eConnector}${ele}${this._mConnector}${modi}`;
+            return `${ prefix }${ this._eConnector }${ ele }${ this._mConnector }${ modi }`;
           }
         } else {
-          return `${prefix}${this._mConnector}${description.substring(1)}`;
+          return `${ prefix }${ this._mConnector }${ description.substring(1) }`;
         }
       } else if (typeOF(description) === typeOF.ARRAY) {
         const ret = [];
         for (const ele of description) {
-          if (!ele) continue;
+          if (!ele) {continue;}
           if (typeOF(ele) === typeOF.OBJECT) {
             ret.push(resolveObject(ele));
           } else if (!ele.startsWith(':')) {
             if (ele.indexOf(':') === -1) {
-              ret.push(`${prefix}${this._eConnector}${ele}`);
+              ret.push(`${ prefix }${ this._eConnector }${ ele }`);
             } else {
               const [ el, modi ] = ele.split(':');
-              ret.push(`${prefix}${this._eConnector}${el}${this._mConnector}${modi}`);
+              ret.push(`${ prefix }${ this._eConnector }${ el }${ this._mConnector }${ modi }`);
             }
           } else {
-            ret.push(`${prefix}${this._mConnector}${ele.substring(1)}`);
+            ret.push(`${ prefix }${ this._mConnector }${ ele.substring(1) }`);
           }
         }
         return ret;
       } else if (typeOF(description) === typeOF.OBJECT) {
         /**
-         * 
+         *
          * {
          *   element: Boolean, // element
          *   ":modifier": Boolean, // modifier
@@ -103,7 +104,7 @@ class vueBem {
          */
         return resolveObject(description);
       } else {
-        throw new Error('Illegal type, requires one of string, string[], object.')
+        throw new Error('Illegal type, requires one of string, string[], object.');
       }
     };
     return em;

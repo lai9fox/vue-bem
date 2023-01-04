@@ -7,9 +7,9 @@ test('TEST OBJECT: empty object', () => {
 
 test('TEST OBJECT: element', () => {
   expect(bem({
-    'element': true,
+    'element': true
   })).toEqual({
-    'object__element': true,
+    'object__element': true
   });
 });
 
@@ -23,7 +23,7 @@ test('TEST OBJECT: modifier', () => {
 
 test('TEST OBJECT: element with modifier', () => {
   expect(bem({
-    'ele:modi': true,
+    'ele:modi': true
   })).toEqual({
     'object__ele--modi': true
   });
@@ -43,6 +43,6 @@ test('TEST OBJECT: mutil properties object', () => {
     'object--awh2': false,
     'object--123': true,
     'object__xy--123a': true,
-    'object__i--kis': false,
+    'object__i--kis': false
   });
 });

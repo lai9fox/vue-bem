@@ -46,12 +46,12 @@ test('TEST ARRAY: array with ternary expressions', () => {
     'ele:modifi',
     ':modifi',
     5 > 1 ? '' : 'fbo',
-    1 > 5 ? '' : 'obf',
+    1 > 5 ? '' : 'obf'
   ])).toEqual([
     'array__ele',
     'array__ele--modifi',
     'array--modifi',
-    'array__obf',
+    'array__obf'
   ]);
 });
 
@@ -63,7 +63,7 @@ test('TEST ARRAY: array with object', () => {
     {
       abc: true,
       ':123a': false,
-      'ase:ntj': true,
+      'ase:ntj': true
     }
   ])).toEqual([
     'array__ele',
@@ -72,7 +72,7 @@ test('TEST ARRAY: array with object', () => {
     {
       'array__abc': true,
       'array--123a': false,
-      'array__ase--ntj': true,
+      'array__ase--ntj': true
     }
   ]);
 });
