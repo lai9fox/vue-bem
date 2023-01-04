@@ -1,0 +1,89 @@
+.V2test {
+
+  border-radius: 10px;
+  box-shadow: 5px 5px rgba(0, 0, 0, 0.15);
+  padding: 10px;
+
+  // string args
+  &__string {
+    width: 100%;
+    border: 1px solid rgb(0, 178, 169);
+    margin-bottom: 15px;
+  }
+  &--hover {
+    height: 40px;
+    background-color: rgb(166, 252, 207);
+  }
+  &__input {
+    &--focus {
+      height: 40px;
+      background-color: rgb(84, 167, 240);
+    }
+  }
+
+  // array args
+  &__array {
+    width: 100%;
+    border: 1px solid rgb(148, 0, 178);
+    margin-bottom: 15px;
+  }
+  &__banner {
+    height: 40px;
+    background-color: rgb(171, 171, 171);
+  
+    &--red-border {
+      border: 3px solid red;
+    }
+
+    &--border-radius {
+      border-radius: 20px;
+    }
+  }
+
+  &__ternary {
+    height: 40px;
+    padding: 5px;
+    margin: 5px;
+
+    &--true {
+      background-color: rgb(18, 203, 18);
+    }
+    &--false {
+      background-color: rgb(203, 40, 18);
+    }
+  }
+
+  &__oia {
+    height: 40px;
+    padding: 5px;
+    margin: 5px;
+    transition: border-radius 0.3s;
+
+    &--true {
+      border-radius: 15px;
+    }
+
+    &-always {
+      background-color: rgb(112, 174, 228);
+    }
+
+    &--bord {
+      border: 5px solid black;
+    }
+  }
+
+  // object args
+  &__object {
+    width: 100%;
+    border: 1px solid rgb(154, 196, 4);
+  }
+
+  &__obj {
+    height: 40px;
+    margin: 5px;
+    
+    &--outline {
+      outline: 3px solid rgb(186, 192, 163);
+    }
+  }
+}

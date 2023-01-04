@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- less -->
+  <link rel="stylesheet/less" type="text/css" href="v2.less" />
+  <script src="less.min.js" type="text/javascript"></script>
+  <!-- vue -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <title>vueBem test on vue2</title>
+</head>
+<body>
+  
+  <div id="app" :class="bem()">
+    <div :class="bem('string')">
+      <h2>string args</h2>
+      <div :class="bem(':hover')"></div>
+      <div :class="bem('input:focus')"></div>
+    </div>
+    <div :class="bem('array')">
+      <h2>array args</h2>
+      <div :class="bem(['banner', 'banner:red-border', 'banner:border-radius'])"></div>
+      <div :class="bem(['ternary', ternaryA ? 'ternary:true' : 'ternary:false'])">
+        <button @click="ternaryA = !ternaryA">Toggle ternaryA</button>
+      </div>
+      <div :class="bem(['oia', {'oia:true': objInArray, 'oia-always': true, 'oia:bord': false}])">
+        <button @click="objInArray = !objInArray">Toggle objInArray</button>
+      </div>
+    </div>
+    <div :class="bem('object')">
+      <h2>object args</h2>
+      <div :class="bem(objClass)">
+        <button @click="objClass['obj:outline'] = false">REMOVE OUTLINE</button>
+        <button @click="objClass['obj:outline'] = true">ADD OUTLINE</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import vueBem from '../index.js';
+    const bem = vueBem.createBem('V2test');
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        ternaryA: false,
+        objInArray: false,
+        objClass: {
+          obj: true,
+          'obj:outline': true
+        }
+      },
+      methods: {
+        bem,
+      },
+    })
+  </script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 {
   "name": "@lai9fox/vue-bem",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "vue bem class",
   "main": "index.js",
   "type": "module",
