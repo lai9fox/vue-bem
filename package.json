@@ -35,5 +35,8 @@
     "eslint": "^8.31.0",
     "jest": "^29.3.1",
     "rollup": "^3.9.1"
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.21"
   }
 }
