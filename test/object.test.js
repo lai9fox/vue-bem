@@ -46,3 +46,40 @@ test('TEST OBJECT: mutil properties object', () => {
     'object__i--kis': false
   });
 });
+
+test('TEST OBJECT: object with empty string cover modifier', () => {
+  expect(bem({
+    abc: false,
+    ':123': true,
+    'i:kis': false
+  }, '')).toEqual({
+    'object__abc': false,
+    'object--123': true,
+    'object__i--kis': false
+  });
+});
+
+test('TEST OBJECT: object with cover modifier', () => {
+  expect(bem({
+    abc: false,
+    ':123': true,
+    'i:kis': false
+  }, 'cover')).toEqual({
+    'object__abc--cover': false,
+    'object--123': true,
+    'object__i--kis': false
+  });
+});
+
+
+test('TEST OBJECT: object with plain cover modifier', () => {
+  expect(bem({
+    abc1: false,
+    'abc2': true,
+    'abc3': false
+  }, 'cover')).toEqual({
+    'object__abc1--cover': false,
+    'object__abc2--cover': true,
+    'object__abc3--cover': false,
+  });
+});
