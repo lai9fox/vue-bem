@@ -1,8 +1,6 @@
-import vueBem from '../src/index.js';
-
+import vueBem from '../src/core/index.js';
 vueBem.configure({ element: '$$' });
 vueBem.configure({ prefix: 'CONFIGS', modifier: '@@' });
-
 const configBem = vueBem.createBem('config2');
 
 test('TEST CONFIG: configs prefix', () => {
