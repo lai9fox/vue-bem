@@ -7,5 +7,4 @@ export default {
     file: 'dist/index.js'
   },
   plugins: [nodeResolve(), terser()]
-  // plugins: [nodeResolve()]
 };

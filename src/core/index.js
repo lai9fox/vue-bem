@@ -1,4 +1,5 @@
 import { typeOF } from '../utils/index.js';
+import { kebabCase } from 'lodash-es';
 
 class vueBem {
   constructor() {
@@ -31,7 +32,7 @@ class vueBem {
       throw new Error("A 'blockname' of type string is required");
     }
 
-    const prefix = this._gP ? `${ this._gP }-${ blockName }` : blockName;
+    const prefix = this._gP ? `${ this._gP }-${ kebabCase(blockName) }` : kebabCase(blockName);
 
     /**
      * 处理字符串类型的参数，返回处理后的字符串

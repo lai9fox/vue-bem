@@ -1,43 +1,80 @@
-## 配置
-
-允许修改全局配置：
-- `prefix` 全局命名前缀，设置该值后，每个生成的类名均会附带该前缀;
-- `element` 元素分割符，默认为 `__`;
-- `modifier` 修饰分隔符，默认为 `--`;
+## 引入
+可通过插件形式全局注入或者手动在每个文件中引入
+### 插件形式(目前支持vue2)
+在入口文件如 `index.js`、`main.js` 等文件中引入：
 ```js
-import vueBem from '@lai9fox/vue-bem';
-vueBem.configure({ prefix: 'lai9fox', element: '__', modifier: '--' });
+import Vue from 'vue';
+import vBem from '@lai9fox/vue-bem';
+Vue.use(vBem, { name: '', prefix: '', element: '', modifier: '' });
 ```
-生成的类名: <font color="red">lai9fox-</font>blockName<font color="red">__</font>elementName<font color="red">--</font>modifierName
+选项用于修改 `bem` 生成器的行为属性:
+
+- `name`: 调用生成器时使用的函数名称，默认调用名称为 `$bem`;
+- `prefix`: 全局前缀，设置该值后所有生成的类名均会附带该前缀，默认无前缀;
+- `element`: bem 中的元素分隔符，默认值 `__`;
+- `modifier`: bem 中的修饰分隔符，默认值 `--`;
+
+使用插件时，注入生成器时会尝试从当前实例获取 `bemNS` 或者 `name` 属性作为命名空间，并且将命名空间转为 `kebab-case` 命名形式，上述属性不存在时将<font color=red>不会</font>注入生成器:
+```html
+<script>
+export default {
+  bemNS: 'CustomName123', // 自定义属性，优先级高于 name 属性: => custom-name-123
+  name: 'App', // 当没有设置 bemNS 时，使用该属性作为命名空间
+  data() {},
+  methods: {},
+}
+</script>
+```
+
+### 手动引入
+要修改 `bem` 生成器的行为属性，在入口文件如 `index.js`、`main.js` 等文件中设置：
+```js
+import { vueBem } from '@lai9fox/vue-bem';
+vueBem.configure({ prefix: '', element: '', modifier: '' });
+```
+- `prefix`: 全局前缀，设置该值后所有生成的类名均会附带该前缀，默认无前缀;
+- `element`: bem 中的元素分隔符，默认值 `__`;
+- `modifier`: bem 中的修饰分隔符，默认值 `--`;
+
+在需要使用生成器的地方：
+```html
+<script>
+import { vueBem } from '@lai9fox/vue-bem';
+const bem = vueBem.createBem('NameSpace'); // 设置命名空间，必须的，内部会转为 name-space
+
+export default {
+  methods: {
+    bem, // 需要在这里注册生成器
+  }
+}
+</script>
+```
 
 ## 创建命名块
 
-要使用 `bem` 命名规范，需要先创建一个命名块 `block` 以返回 `bem` 生成器。
-
-通过生成器可以在该命名块下添加元素 `element`、修饰符 `modifier`，修饰符以 `:` 标识:
+通过生成器可以在该命名块下添加元素 `element`、修饰符 `:modifier`，或者携带修饰符的元素 `element:modifier`，修饰符以 `:` 标识:
 
 ```js
-import vueBem from '@lai9fox/vue-bem';
-const bem = vueBem.createBem('header');
+import { vueBem } from '@lai9fox/vue-bem';
 // header 块下的 bem 生成器
+const bem = vueBem.createBem('header');
 
-bem('logo');
 // header 块下添加元素 logo，最终结果： header__logo
-bem(':focus');
+bem('logo');
 // header 块下添加修饰符 focus，最终结果： header--focus
-bem('logo:focus');
+bem(':focus');
 // header 块下添加元素 logo，且元素附带 focus 修饰符，最终结果：header__logo--focus
+bem('logo:focus');
 ```
 
 ## 生成器
-
-`const bem = createBem('block')`
 
 生成器接收三种类型的参数，返回对应类型的结果
 
 ### **bem(string) => string**
 ```js
 const bem = vueBem.createBem('block');
+
 bem('element'); 
 // 添加一个元素，返回结果: block__element
 bem(':modifier');
@@ -85,12 +122,13 @@ data: {
 
 ## 绑定
 ```html
+<!-- 手动引入 -->
 <div :class="bem(xxxx)"></div>
 <div :class="bem([ a, b, c, ... ])"></div>
 <div :class="bem({ d: Boolean, e: Boolean, ... })"></div>
 
 <script>
-  import vueBem from '@lai9fox/vue-bem';
+  import { vueBem } from '@lai9fox/vue-bem';
   const bem = vueBem.createBem('blockName');
   export default {
     data() {
@@ -98,6 +136,21 @@ data: {
     },
     methods: {
       bem,
+    }
+  }
+</script>
+
+<!-- 插件注入 -->
+<div :class="$bem(xxxx)"></div>
+<div :class="$bem([ a, b, c, ... ])"></div>
+<div :class="$bem({ d: Boolean, e: Boolean, ... })"></div>
+
+<script>
+  export default {
+    name: 'xxx', // name 或者 bemNS 至少设置一个
+    bemNS: 'yyy',
+    data() {
+      return {}
     }
   }
 </script>
