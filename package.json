@@ -1,6 +1,6 @@
 {
   "name": "@lai9fox/vue-bem",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "vue bem class",
   "main": "dist/index.js",
   "files": [
@@ -12,7 +12,13 @@
     "build": "rollup --config"
   },
   "jest": {
-    "collectCoverage": true
+    "collectCoverage": true,
+    "transform": {
+      "\\.[jt]sx?$": "es-jest"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!lodash-es)"
+    ]
   },
   "repository": {
     "type": "git",
@@ -31,9 +37,14 @@
   "homepage": "https://github.com/lai9fox/vue-bem#readme",
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.20.11",
+    "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-terser": "^0.2.1",
+    "es-jest": "^2.1.0",
     "eslint": "^8.31.0",
     "jest": "^29.3.1",
     "rollup": "^3.9.1"
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.21"
   }
 }

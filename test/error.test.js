@@ -1,4 +1,4 @@
-import vueBem from '../src/index.js';
+import vueBem from '../src/core/index.js';
 
 test("TEST ERROR: illegal 'blockName' input", () => {
   expect(() => { vueBem.createBem(); })

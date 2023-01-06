@@ -1,4 +1,4 @@
-import vueBem from '../src/index.js';
+import vueBem from '../src/core/index.js';
 const bem = vueBem.createBem('object');
 
 test('TEST OBJECT: empty object', () => {

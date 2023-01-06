@@ -1,5 +1,4 @@
-import vueBem from '../src/index.js';
-
+import vueBem from '../src/core/index.js';
 const bem = vueBem.createBem('string');
 
 test('TEST STRING: plain block name', () => {
