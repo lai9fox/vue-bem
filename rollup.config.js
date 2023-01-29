@@ -1,4 +1,4 @@
-import terser from '@rollup/plugin-terser';
+// import terser from '@rollup/plugin-terser';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export default {
@@ -6,5 +6,6 @@ export default {
   output: {
     file: 'dist/index.js'
   },
-  plugins: [nodeResolve(), terser()]
+  // plugins: [nodeResolve(), terser()]
+  plugins: [nodeResolve()]
 };
