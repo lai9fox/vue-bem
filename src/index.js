@@ -8,23 +8,35 @@ import vueBem from './core/index.js';
  * @param {string} [options.element] 自定义的元素连接符
  * @param {string} [options.modifier] 自定义的修饰连接符
  */
-function install(Vue, options = {}) {
+function install(Vue, options) {
   const version = Number(Vue.version.split('.')[0]);
   vueBem.configure(options);
+  const bemName = options.name || '$bem';
   if (version === 2) {
     Vue.mixin({
       created: function() {
         // 自定义属性名 || 组件名 => kebab-case 形式，bemNS 优先级高于 name
+        // 命名空间
         const namespace = this.$options.bemNS || this.$options.name;
         if (typeof namespace !== 'string' || !namespace) {
           return;
         }
-        const bemName = options.name || '$bem';
         this[bemName] = vueBem.createBem(namespace);
       }
     });
   } else if (version === 3) {
-    //
+    // console.log('v3 trigger', bemName);
+    Vue.config.globalProperties[bemName] = function(description, modifier) {
+      if (this) {
+        const namespace = this.$options.bemNS || this.$options.name;
+        if (typeof namespace !== 'string' || !namespace) {
+          return;
+        }
+        return vueBem.createBem(namespace)(description, modifier);
+      }
+      return;
+    };
+    Vue.provide(bemName, vueBem.createBem.bind(vueBem));
   } else {
     throw new Error(`vue-bem do not support version ${ version }.`);
   }
