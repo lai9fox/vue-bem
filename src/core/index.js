@@ -10,7 +10,7 @@ class vueBem {
 
   /**
    * 修改配置接口
-   * @param {object} configs
+   * @param {object} [configs]
    * @param {string} [configs.prefix] 全局的前缀
    * @param {string} [configs.element] 元素连接符
    * @param {string} [configs.modifier] 修饰连接符
