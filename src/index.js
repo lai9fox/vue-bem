@@ -11,7 +11,7 @@ import vueBem from './core/index.js';
 function install(Vue, options) {
   const version = Number(Vue.version.split('.')[0]);
   options && vueBem.configure(options);
-  const bemName = options.name || '$bem';
+  const bemName = options && options.name ? options.name : '$bem';
   if (version === 2) {
     Vue.mixin({
       created: function() {
