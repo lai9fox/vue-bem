@@ -2,7 +2,7 @@ import vueBem from './core/index.js';
 
 /**
  * @param {Vue} Vue Vue 构造器
- * @param {object} options 配置项
+ * @param {object} [options] 配置项
  * @param {string} [options.name] 自定义的 bem 生成器名称
  * @param {string} [options.prefix] 自定义的全局前缀
  * @param {string} [options.element] 自定义的元素连接符
@@ -10,7 +10,7 @@ import vueBem from './core/index.js';
  */
 function install(Vue, options) {
   const version = Number(Vue.version.split('.')[0]);
-  vueBem.configure(options);
+  options && vueBem.configure(options);
   const bemName = options.name || '$bem';
   if (version === 2) {
     Vue.mixin({
